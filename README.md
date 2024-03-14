@@ -9,12 +9,24 @@
 - Evelyn Aragon ()
 
 ## Objetivo/s del proyecto
+- Investigar la aplicación de la IA en diferentes procesos de la vida diaria, a nivel personal, profesional y
+empresarial.
+- Profundizar en el conocimiento de:
+  - Onbording Digital
+  - Importancia de la IA en el onboarding
+  - Proceso de Onbording Digital
+    - Análisis de un documento de identidad
+    - Biometría
+    - Listas AML (Anti Money Laundering)
+o Normativas existentes
+- Mostrar en un Chatbot dicha aplicación
+
 
 ## Investigación
 #### Aplicación de la IA:
 #### Onboarding Digital:
 #### Normativas existentes:
-
+## Objetivo/s del Chatbot
 ## Herramientas a utilizar
 - 
 - 

@@ -1,12 +1,12 @@
 # TP Inicial - Laboratorio de Construcción de Software / Proyecto Profesional I
 
 ### Alumnos
-- Hirschfeld Agustina Camila ()
-- Veron Adrian ()
+- Hirschfeld Agustina Camila (camilahirschf@gmail.com)
+- Veron Adrian (adrianveron4@hotmail.com)
 - Cabrera Juan Manuel (amnauju5@gmail.com)
 ### Profesores
 - Juan Carlos Monteros (jcmonteros@campus.ungs.edu.ar)
-- Evelyn Aragon ()
+- Evelyn Aragon (eve_aragon@hotmail.com)
 
 ## Objetivo/s del proyecto
 - Investigar la aplicación de la IA en diferentes procesos de la vida diaria, a nivel personal, profesional y

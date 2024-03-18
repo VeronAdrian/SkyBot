@@ -25,11 +25,11 @@ o Normativas existentes
 ## Investigación
 #### Aplicación de la IA:
 La Comisión Mundial de Ética del Conocimiento Científico y la Tecnología (COMEST) de la UNESCO definió la inteligencia artificial como un campo que implica máquinas capaces de imitar determinadas funcionalidades de la inteligencia humana, incluidas características como la percepción, el aprendizaje, el razonamiento, la resolución de problemas, la interacción lingüística e incluso la producción de trabajos creativos.Esta definición abarca una amplia gama de aplicaciones, desde asistentes personales hasta sistemas de recomendación y detección de fraude.\
-**A nivel personal**\
+`A nivel personal`\
 La IA ha revolucionado la forma en que interactuamos con la tecnología, permitiendo una interacción más natural y personalizada. Asistentes virtuales como Siri, Alexa y Cortana han evolucionado para comprender y predecir nuestras necesidades, facilitando tareas cotidianas y mejorando la experiencia del usuario. Además, la IA se utiliza en sistemas de recomendación y traducción automática, adaptándose a nuestras preferencias y necesidades individuales.\
-**A nivel profesional**\
+`A nivel profesional`\
 La IA juega un papel crucial en la gestión de recursos humanos y la evaluación de entrevistas de trabajo, proporcionando información objetiva y ayudando a reducir prejuicios. El análisis de datos es una herramienta poderosa que permite a las empresas tomar decisiones informadas y eficientes.\
-**A nivel empresarial**\
+`A nivel empresarial`\
 La IA se ha convertido en una herramienta esencial para la optimización de procesos, la personalización del marketing, el servicio al cliente, la predicción de ventas, la detección de fraude, la automatización de procesos de fabricación y la optimización de la cadena de suministro. Estas aplicaciones han demostrado ser invaluables para mejorar la productividad, la eficiencia y la competitividad de las empresas.
 
 #### Onboarding Digital:

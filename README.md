@@ -49,6 +49,8 @@ En el ámbito argentino, el proceso de incorporación digital se encuentra sujet
  Normativas sectoriales: Además de las regulaciones generales mencionadas, existen disposiciones específicas para diversos sectores como el financiero, asegurador y de telecomunicaciones. Estas normativas pueden incluir requisitos adicionales para el Onboarding digital en los ámbitos respectivos.
 
 ## Objetivo/s del Chatbot
+El objetivo principal del chatbot es actuar como un recurso informativo para los usuarios, proporcionando respuestas claras y concisas sin limitarse a un propósito específico. Este chatbot sera diseñado para manejar una variedad de temas y preguntas planteadas por los usuarios. Su función principal se centrara en ofrecer información precisa y relevante en respuesta a las consultas realizadas por el usuario, garantizando que los mismos obtengan respuestas satisfactorias y útiles, independientemente de la naturaleza o la diversidad de los temas abordados.
+
 ## Herramientas a utilizar
 - Lenguaje de programación Python para el procesamiento de datos y la implementación de algoritmos de Machine Learning.
 - Bibliotecas de IA y Machine Learning como scikit-learn,etc.

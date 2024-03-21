@@ -50,6 +50,10 @@
         "Cuál es tu mayor desafío",
         "Cuál es tu filosofía de vida",
         "Cómo te sientes acerca de la creatividad",
-        "Cuál es tu objetivo final"
+        "Cuál es tu objetivo final",
+        "Cuanto es 1 + 1",
+        "Cuanto es 1 - 1", 
+        "Cuanto es 1 * 1", 
+        "Cuanto es 1 / 1"
     ]
 }

@@ -36,26 +36,58 @@ def get_detailed_weather(city):
         return detailed_info
     else:
         return "Ciudad no encontrada. Por favor, verifica el nombre de la ciudad."
+    
+import requests
 
+def get_forecast(city):
+    api_key = "931aa658cbbb2c158a8171e9ef2bfb90"
+    base_url = "http://api.openweathermap.org/data/2.5/forecast?"
+    params = {
+        "q": city,
+        "appid": api_key,
+        "units": "metric"
+    }
+    response = requests.get(base_url, params=params)
+    data = response.json()
+    if data["cod"] != "404":
+        forecast_list = data["list"]
+        forecast_info = []
+        for forecast in forecast_list:
+            date_time = forecast["dt_txt"]
+            temperature = forecast["main"]["temp"]
+            weather_desc = forecast["weather"][0]["description"]
+            forecast_info.append(f"Fecha y hora: {date_time}, Temperatura: {temperature} grados Celsius, Descripción: {weather_desc}")
+        return "\n".join(forecast_info)
+    else:
+        return "Ciudad no encontrada. Por favor, verifica el nombre de la ciudad."
     
 
 def chatbot():
-    while True:
-        city = input("¿En qué ciudad quieres saber el clima? (Escribe 'salir' para terminar): ")
-        if city.lower() == "salir":
-            break
+    city=selectCity()
+    menu(city)
+    
+def selectCity():
+    city = input("¿En qué ciudad quieres saber el clima?: ")
+    if city.lower() != "salir":
         print(get_weather(city))
-        print("Opciones:")
+    return city
+
+
+def menu(city):
+    while True:
+        print("Menú:")
         print("1. Ver pronóstico del tiempo para los próximos días")
         print("2. Ver detalles del clima actual")
-        print("3. Salir")
+        print("3. Elegir otra ciudad")
+        print("4. Salir")
         option = input("Elige una opción: ")
         if option == "1":
-            print(get_weather(city))
+            print(get_forecast(city))
         elif option == "2":
             print(get_detailed_weather(city))
-            pass
         elif option == "3":
+            city = selectCity()
+        elif option == "4":
             break
         else:
             print("Opción no válida. Por favor, elige una opción del 1 al 3.")

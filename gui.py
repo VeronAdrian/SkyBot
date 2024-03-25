@@ -32,10 +32,11 @@ text_chat.config(state=tk.NORMAL)
 text_chat.insert(tk.END, "Sky: ¡Hola! Soy tu asistente de clima. ¿En qué ciudad quieres saber el clima?:\n")
 text_chat.config(state=tk.DISABLED)
 
-entry_mensaje = tk.Entry(ventana, width=50)
+entry_mensaje = tk.Entry(ventana, width=60)
 entry_mensaje.pack()
 
-boton_enviar = tk.Button(ventana, text="Enviar", command=enviar_mensaje)
+boton_enviar = tk.Button(ventana, text="Enviar", command=enviar_mensaje,border=3,
+                width=26)
 boton_enviar.pack()
 
 

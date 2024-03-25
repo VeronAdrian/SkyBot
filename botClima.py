@@ -1,10 +1,33 @@
-import requests
-import tkinter as tk
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.naive_bayes import MultinomialNB
 from deep_translator import GoogleTranslator
-from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.pipeline import Pipeline
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import LabelEncoder
+import tkinter as tk
+import numpy as np
+import importlib
+import requests
+import json
+import re
+
+city = ""
+watingActivity = False
+
+# Lee los archivos JSON
+with open("recursos/preguntas.json", "r") as file:
+    questions = json.load(file)["preguntas"]
+    
+with open("recursos/respuestas.json", "r") as file:
+    answers = json.load(file)["respuestas"]
+
+# Entrenar el modelo
+pipeline = Pipeline([
+    ("tfidf", TfidfVectorizer()),
+    ("clf", MultinomialNB())
+])
+x_train = questions
+y_train = answers
+pipeline.fit(x_train, y_train)
 
 def connect_api(city):
     api_key = "931aa658cbbb2c158a8171e9ef2bfb90"
@@ -39,7 +62,7 @@ def get_daily_forecast(city):
         "q": city,
         "appid": api_key,
         "units": "metric",
-        "cnt": 1 # Solicita el pronóstico para el día actual
+        "cnt": 1 
     }
     response = requests.get(base_url, params=params)
     data = response.json()
@@ -59,9 +82,9 @@ def get_detailed_weather(city):
         # Verificar si hay nieve
         is_snowing = 'Snow' in weather['main']
         # Verificar si hace mucho calor
-        is_hot = main['temp'] > 30 # Ajusta este umbral según lo que consideres "mucho calor"
+        is_hot = main['temp'] > 30 
         # Verificar si hace mucho frío
-        is_cold = main['temp'] < 0 # Ajusta este umbral según lo que consideres "mucho frío"
+        is_cold = main['temp'] < 0 
         is_cloudy = 'Clouds' in weather['main']
         
         weather_desc = GoogleTranslator(source='english', target='spanish').translate(weather['description'])
@@ -135,22 +158,6 @@ def get_activity_recommendation(city, activity):
     else:
         return f"El clima en {city} es adecuado para {activity}. ¡Disfruta tu día!"
 
-
-def chatbot(mensaje):
-    global city
-    global watingActivity
-
-    if(city == ""):
-        city = mensaje
-        texto_chat.insert(tk.END, f"Sky: {get_weather(city)}")
-        menu()
-    elif(watingActivity):
-        texto_chat.insert(tk.END, f"Sky: {get_activity_recommendation(city,mensaje)}")
-        watingActivity = False
-        menu()
-    else:
-        opciones(mensaje)
-
 def get_coordinates(city):
     api_key = "931aa658cbbb2c158a8171e9ef2bfb90"
     base_url = "http://api.openweathermap.org/geo/1.0/direct?"
@@ -188,7 +195,7 @@ def get_air_pollution(city):
     else:
         return "Error al obtener datos de contaminación del aire. Código de estado: " + str(response.status_code)
 
-# Define AQI categories
+
 aqi_categories = [
     (1, 'Bueno'), (2, 'Regular'), (3, 'Moderado'),
     (4, 'Malo'), (5, 'Muy malo')
@@ -200,87 +207,51 @@ def categorize_aqi(aqi_value):
             return category
     return None
 
-def menu():
-    texto_chat.insert(tk.END, f"\nMenú:\n1. Ver detalles del clima actual\n2. Quiero saber la calidad del aire\n3. Ver pronóstico del tiempo para los próximos días\n4. Recomendación de actividad basada en el clima\n5. Elegir otra ciudad\n6. Salir\n")
-    #print("4. Ver alertas meteorologicas")
+# Función para obtener la respuesta
+def get_response(entrada):
+    similaridad = cosine_similarity(pipeline.named_steps["tfidf"].transform([entrada]), pipeline.named_steps["tfidf"].transform(x_train))
+    mejor_respuesta_idx = np.argmax(similaridad)
+    return answers[mejor_respuesta_idx]
 
-def opciones(mensaje):
+
+def chatbot(message,text_chat):
     global city
     global watingActivity
 
-    if mensaje == "1":
-        texto_chat.insert(tk.END, f"Sky: {get_detailed_weather(city)}\n")
-        menu()  
-    elif mensaje == "2":
-        texto_chat.insert(tk.END, f"Sky: {get_air_pollution(city)}\n")
-        menu()  
-    elif mensaje == "3":
-        texto_chat.insert(tk.END, f"Sky: {get_forecast(city)}\n")
-        menu()  
-    elif mensaje == "4":
-        texto_chat.insert(tk.END, f"Sky: ¿Qué actividad planeas realizar? (ejemplo: correr, nadar, etc.) \n")
-        watingActivity = True
-    elif mensaje == "5":
-        texto_chat.insert(tk.END, "Sky: ¿En qué ciudad quieres saber el clima?\n")
-        city = ""
-    elif mensaje == "6":
-        texto_chat.insert(tk.END, f"Sky: ¡Saludos! Que tengas un gran día :)")
+    gui= importlib.import_module("gui")
+    text_chat =gui.text_chat
+
+    if(city == ""):
+        city = message
+        text_chat.insert(tk.END, f"Sky: {get_weather(city)}\n")
+    elif(watingActivity):
+        text_chat.insert(tk.END, f"Sky: {get_activity_recommendation(city,message)}\n")
+        watingActivity = False
     else:
-        texto_chat.insert(tk.END, f"Sky: Opción no válida. Por favor, elige una opción del 1 al 6.")
-        menu()      
+        options(get_response(message),text_chat)
+
+def options(message,text_chat):
+    global city
+    global watingActivity
+ 
+    if message == "weather_now":
+        text_chat.insert(tk.END, f"Sky: {get_detailed_weather(city)}\n")
+    elif message == "air_quality":
+        text_chat.insert(tk.END, f"Sky: {get_air_pollution(city)}\n")
+    elif message == "weather_future":
+        text_chat.insert(tk.END, f"Sky: {get_forecast(city)}\n")
+    elif message == "activity_suggestion":
+        text_chat.insert(tk.END, f"Sky: ¿Qué actividad planeas realizar? (ejemplo: correr, nadar, etc.) \n")
+        watingActivity = True
+    elif message == "change_city":
+        text_chat.insert(tk.END, "Sky: ¿En qué ciudad quieres saber el clima?\n")
+        city = ""
+    elif message == "quit":
+        text_chat.insert(tk.END, f"Sky: ¡Saludos! Que tengas un gran día :)")
+        quit()
+    else:
+        text_chat.insert(tk.END, f"Sky: {message}\n")
     
 
-def enviar_mensaje():
-    mensaje = entry_mensaje.get()
-    if mensaje:
-        texto_chat.config(state=tk.NORMAL)
-        texto_chat.insert(tk.END, f"Usuario: {mensaje}\n")
-        chatbot(mensaje)
-        # Aquí puedes agregar la lógica para procesar el mensaje y obtener una respuesta
-        # Por ejemplo, si el mensaje es "clima Madrid", puedes llamar a get_weather("Madrid")
-        # y luego mostrar la respuesta en el área de texto del chat.
-        # Por ahora, solo mostramos el mensaje del usuario.
-        texto_chat.config(state=tk.DISABLED)
-        entry_mensaje.delete(0, tk.END)
 
-# Crea la ventana principal
-ventana = tk.Tk()
-ventana.title("Chatbot de Clima")
-
-# Crea un marco para el chat
-frame_chat = tk.Frame(ventana)
-frame_chat.pack()
-
-# Crea un área de texto para mostrar el chat
-texto_chat = tk.Text(frame_chat, width=60, height=30, wrap="word")
-texto_chat.pack(side=tk.LEFT)
-
-# Crea un scrollbar para la ventana de texto
-scrollbar = tk.Scrollbar(frame_chat, command=texto_chat.yview)
-scrollbar.pack(side=tk.RIGHT, fill='y')
-texto_chat.config(yscrollcommand=scrollbar.set)
-
-# Establece los estilos de texto
-texto_chat.tag_config('Usuario', background='#DCF8C6')
-texto_chat.tag_config('Chatbot', background='#C2DFFF')
-
-# Mensaje inicial del chatbot
-texto_chat.config(state=tk.NORMAL)
-texto_chat.insert(tk.END, "Sky: ¡Hola! Soy tu asistente de clima. ¿En qué ciudad quieres saber el clima?:\n")
-texto_chat.config(state=tk.DISABLED)
-
-# Crea un campo de entrada para el mensaje
-entry_mensaje = tk.Entry(ventana, width=50)
-entry_mensaje.pack()
-
-# Crea un botón para enviar el mensaje
-boton_enviar = tk.Button(ventana, text="Enviar", command=enviar_mensaje)
-boton_enviar.pack()
-
-city = ""
-watingActivity = False
-
-
-# Ejecuta la aplicación
-ventana.mainloop()
 

@@ -209,8 +209,8 @@ def categorize_aqi(aqi_value):
 
 # Función para obtener la respuesta
 def get_response(entrada):
-    similaridad = cosine_similarity(pipeline.named_steps["tfidf"].transform([entrada]), pipeline.named_steps["tfidf"].transform(x_train))
-    mejor_respuesta_idx = np.argmax(similaridad)
+    similitud= cosine_similarity(pipeline.named_steps["tfidf"].transform([entrada]), pipeline.named_steps["tfidf"].transform(x_train))
+    mejor_respuesta_idx = np.argmax(similitud)
     return answers[mejor_respuesta_idx]
 
 
@@ -223,7 +223,7 @@ def chatbot(message,text_chat):
 
     if(city == ""):
         city = message
-        text_chat.insert(tk.END, f"Sky: {get_weather(city)}\n")
+        text_chat.insert(tk.END, f"Sky: {get_weather(city)}\n¿Quisieras saber algo más?\nEscriba 'Salir' para finalizar.\n",'Sky')
     elif(watingActivity):
         text_chat.insert(tk.END, f"Sky: {get_activity_recommendation(city,message)}\n")
         watingActivity = False

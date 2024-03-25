@@ -2,20 +2,20 @@ import tkinter as tk
 from botClima import chatbot
 
 def enviar_mensaje():
-    mensaje = entry_mensaje.get()
-    if mensaje:
+    message = entry_text.get()
+    if message:
         text_chat.config(state=tk.NORMAL)
         text_chat.insert(tk.END, "Usuario: ", 'Usuario')
-        text_chat.insert(tk.END, f"{mensaje}\n")
-        chatbot(mensaje,text_chat)
+        text_chat.insert(tk.END, f"{message}\n")
+        chatbot(message,text_chat)
         text_chat.config(state=tk.DISABLED)
-        entry_mensaje.delete(0, tk.END)
+        entry_text.delete(0, tk.END)
 
 # Crea la ventana principal y los widgets
-ventana = tk.Tk()
-ventana.title("Sky ChatBot")
+windows = tk.Tk()
+windows.title("Sky ChatBot")
 
-frame_chat = tk.Frame(ventana)
+frame_chat = tk.Frame(windows)
 frame_chat.pack()
 
 text_chat = tk.Text(frame_chat, width=100, height=35, wrap="word")
@@ -32,11 +32,10 @@ text_chat.config(state=tk.NORMAL)
 text_chat.insert(tk.END, "Sky: ¡Hola! Soy tu asistente de clima. ¿En qué ciudad quieres saber el clima?:\n")
 text_chat.config(state=tk.DISABLED)
 
-entry_mensaje = tk.Entry(ventana, width=60)
-entry_mensaje.pack()
+entry_text = tk.Entry(windows, width=60)
+entry_text.pack()
 
-boton_enviar = tk.Button(ventana, text="Enviar", command=enviar_mensaje,border=3,
-                width=26)
+boton_enviar = tk.Button(windows, text="Enviar", command=enviar_mensaje,border=3,width=26)
 boton_enviar.pack()
 
 

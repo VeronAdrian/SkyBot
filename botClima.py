@@ -14,11 +14,11 @@ city = ""
 watingActivity = False
 
 # Lee los archivos JSON
-with open("recursos/preguntas.json", "r") as file:
-    questions = json.load(file)["preguntas"]
+with open("BotData/questions.json", "r") as file:
+    questions = json.load(file)["questions"]
     
-with open("recursos/respuestas.json", "r") as file:
-    answers = json.load(file)["respuestas"]
+with open("BotData/answers.json", "r") as file:
+    answers = json.load(file)["answers"]
 
 # Entrenar el modelo
 pipeline = Pipeline([
@@ -209,9 +209,9 @@ def categorize_aqi(aqi_value):
 
 # Función para obtener la respuesta
 def get_response(entrada):
-    similitud= cosine_similarity(pipeline.named_steps["tfidf"].transform([entrada]), pipeline.named_steps["tfidf"].transform(x_train))
-    mejor_respuesta_idx = np.argmax(similitud)
-    return answers[mejor_respuesta_idx]
+    match = cosine_similarity(pipeline.named_steps["tfidf"].transform([entrada]), pipeline.named_steps["tfidf"].transform(x_train))
+    best_match = np.argmax(match)
+    return answers[best_match]
 
 
 def chatbot(message,text_chat):
@@ -252,6 +252,3 @@ def options(message,text_chat):
     else:
         text_chat.insert(tk.END, f"Sky: {message}\n")
     
-
-
-

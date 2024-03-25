@@ -1,5 +1,5 @@
 import tkinter as tk
-from gui import ventana
+from gui import windows
 
 if __name__ == "__main__":
-    ventana.mainloop()
+    windows.mainloop()

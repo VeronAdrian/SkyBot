@@ -1,6 +1,8 @@
 {
-    "preguntas" : [
+    "questions" : [
+        "",
         "Hola",
+        "Que haces",
 
         "Ver detalles del clima actual",
         "Mostrar información sobre las condiciones climáticas actuales",

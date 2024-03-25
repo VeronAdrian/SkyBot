@@ -1,7 +1,9 @@
 {
-    "respuestas" : [
+    "answers" : [
+        "No entiendo que me estas diciendo",
         "Hola, buenos dias",
-
+        "Soy Sky estoy entrenada para dar información del clima",
+        
         "weather_now",
         "weather_now",
         "weather_now",

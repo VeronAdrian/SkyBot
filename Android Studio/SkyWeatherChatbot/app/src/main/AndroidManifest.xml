@@ -34,6 +34,50 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.Chatbot"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.SkyWeatherChatbot">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".model.MessageAdapter"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.SkyWeatherChatbot">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".model.Message"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.SkyWeatherChatbot">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".service.ChatbotService"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.SkyWeatherChatbot">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

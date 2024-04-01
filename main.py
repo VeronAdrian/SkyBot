@@ -8,6 +8,11 @@ def chatbotAnswer(entry):
     text = get_text(entry)
     return text
 
+#Basico
+@app.route('/')
+def basic():
+    jsonify({'response': 'Hola'})
+
 #Realzar la respuesta
 @app.route('/answer/<string:question>', methods=['GET'])
 def getAnswer(question):
@@ -22,3 +27,5 @@ def ping():
 
 if __name__ == '__main__':
     app.run(debug=True, port=4000)
+    
+#gunicorn

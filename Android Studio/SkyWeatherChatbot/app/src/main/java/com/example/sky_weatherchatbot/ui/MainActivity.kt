@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
 
             Button(onClick = {
                 if (auth){
-                    val intent = Intent(this@MainActivity, Chat::class.java)
+                    val intent = Intent(this@MainActivity, Chatbot::class.java)
                     startActivity(intent)
                 }
                 else{

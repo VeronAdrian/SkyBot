@@ -252,3 +252,5 @@ def options(message,text_chat):
     else:
         text_chat.insert(tk.END, f"Sky: {message}\n")
     
+def fast_answer(entry):
+    return get_response(entry)

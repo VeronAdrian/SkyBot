@@ -1,5 +1,5 @@
 import tkinter as tk
-from botClima import chatbot
+from botClima import chatbot, fast_answer
 
 def enviar_mensaje():
     message = entry_text.get()
@@ -10,6 +10,10 @@ def enviar_mensaje():
         chatbot(message,text_chat)
         text_chat.config(state=tk.DISABLED)
         entry_text.delete(0, tk.END)
+        
+def get_text(entry):
+    text = fast_answer(entry)
+    return text
 
 # Crea la ventana principal y los widgets
 windows = tk.Tk()

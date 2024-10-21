@@ -55,8 +55,7 @@ El objetivo principal del chatbot es actuar como un recurso informativo para los
 - Lenguaje de programación Python para el procesamiento de datos y la implementación de algoritmos de Machine Learning.
 - Bibliotecas de IA y Machine Learning como scikit-learn,etc.
 - Gitlab para gestionar el código del proyecto y colaborar en el trabajo en equipo.
-- 
-- 
+
 ## Fuentes
 https://www.ibm.com/es-es/topics/artificial-intelligence\
 https://www.mobbeel.com/blog/que-es-el-onboarding-digital/#:~:text=El%20digital%20onboarding%20se%20refiere,la%20inteligencia%20artificial%20(IA)\
